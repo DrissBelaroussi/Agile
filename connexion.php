@@ -1,11 +1,13 @@
 <?php require_once('SPDO.php'); ?>
 
-<form action="formulaire.php" action="post">
-	<p> Login <input type="text" name="login"/>
-	<p> Mot de passe <input type="password" name="mdp"/>
+<h1> Connexion </h1>
+
+<form action="connexion.php" action="post">
+	<p> Login <input type="text" name="login"/> </p>
+	<p> Mot de passe <input type="password" name="mdp"/> </p>
 	<!-- <input type="radio" name="fonction" value="medecin"/>Médecin
 	<input type="radio" name="fonction" value="patient"/>Patient -->
-	<input type="submit" value="Connexion"/>
+	<p> <input type="submit" value="Connexion"/> </p>
 </form>
 
 <?php
@@ -88,6 +90,8 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 				$_SESSION['nom'] = $res[0];
 				$_SESSION['prenom'] = $res[1];
 				$_SESSION['connecte'] = true;
+				echo 'Connexion réussie';
+				var_dump($_SESSION);
 			}
 		}
 		
@@ -103,6 +107,8 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 				$_SESSION['nom'] = $res[0];
 				$_SESSION['prenom'] = $res[1];
 				$_SESSION['connecte'] = true;
+				echo 'Connexion réussie';
+				var_dump($_SESSION);
 			}
 		}
 	}
