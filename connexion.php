@@ -2,7 +2,7 @@
 
 <h1> Connexion </h1>
 
-<form action="connexion.php" action="post">
+<form action="connexion.php" method="post">
 	<p> Login <input type="text" name="login"/> </p>
 	<p> Mot de passe <input type="password" name="mdp"/> </p>
 	<!-- <input type="radio" name="fonction" value="medecin"/>Médecin
