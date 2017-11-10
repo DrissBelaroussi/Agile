@@ -55,7 +55,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 	
 	catch (PDOException $e)
 	{
-		die('<p> La connexion a échoué. Erreur[' . $e->getCode() . '] : ' . $e->getMessage() . '</p>';
+		die('<p> La connexion a échoué. Erreur[' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
 	}
 }
 */
@@ -109,7 +109,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 	
 	catch (PDOException $e)
 	{
-		die('<p> La connexion a échoué. Erreur[' . $e->getCode() . '] : ' . $e->getMessage() . '</p>';
+		die('<p> La connexion a échoué. Erreur[' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
 	}
 }
 ?>
