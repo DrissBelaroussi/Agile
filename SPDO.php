@@ -1,10 +1,10 @@
 <?php
 
-define('BDD_HOST', 'aquabdd');     // aquabdd
-define('BDD_LOGIN', 'tmp_info_024');         // n° étudiant
-define('BDD_MDP', 'tmp_info_024');               // password étudiant
-define('BDD_DATABASE', 'promotion16');       // promotion16
-define('BDD_DRIVER', 'pgsql');       // pgsql
+define('BDD_HOST', '127.0.0.1');     // aquabdd
+define('BDD_LOGIN', 'ubuntu');         // n° étudiant
+define('BDD_MDP', 'azerty');               // password étudiant
+define('BDD_DATABASE', 'agile');       // promotion16
+define('BDD_DRIVER', 'mysql');       // pgsql
 
 class SPDO{
   private $PDOInstance = null;
