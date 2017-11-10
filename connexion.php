@@ -1,4 +1,4 @@
-<?php require_once('spdo.php'); ?>
+<?php require_once('SPDO.php'); ?>
 
 <form action="formulaire.php" action="post">
 	<p> Login <input type="text" name="login"/>
