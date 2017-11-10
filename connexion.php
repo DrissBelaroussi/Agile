@@ -16,6 +16,8 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 {
 	try
 	{
+		$bd = spdo::getDB ();
+		
 		if ($_POST['fonction'] == 'medecin')
 		{
 			$txt = 'SELECT mdp FROM MEDECIN WHERE login = :login';
@@ -25,7 +27,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 		{
 			$txt = 'SELECT mdp FROM PATIENT WHERE login = :login';
 		}
-		$req->prepare($txt);
+		$req = $bd->prepare($txt);
 		$req->bindValue(':login', $_POST['login']);
 		$req->execute();
 		$res = $req->fetch(PDO::FETCH_ASSOC);
@@ -43,7 +45,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 					$txt = 'SELECT nomPatient, prenomPatient FROM PATIENT WHERE login = :login';
 				}
 				
-				$req->prepare($txt);
+				$req = $bd->prepare($txt);
 				$req->bindValue(':login', $_POST['login']);
 				$req->execute();
 				$res2 = $req->fetch(PDO::FETCH_NUM);
@@ -66,14 +68,16 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 {
 	try
 	{
+		$bd = spdo::getDB ();
+		
 		$txt = 'SELECT mdp FROM MEDECIN WHERE login = :login';
-		$req1->prepare($txt);
+		$req1 = $bd->prepare($txt);
 		$req1->bindValue(':login', $_POST['login']);
 		$req1->execute();
 		$res1 = $req1->fetch(PDO::FETCH_ASSOC);
 		
 		$txt = 'SELECT mdp FROM PATIENT WHERE login = :login';
-		$req2->prepare($txt);
+		$req2 = $bd->prepare($txt);
 		$req2->bindValue(':login', $_POST['login']);
 		$req2->execute();
 		$res2 = $req2->fetch(PDO::FETCH_ASSOC);
@@ -83,7 +87,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 			if ($_POST['mdp'] = $res1['mdp'])
 			{
 				$txt = 'SELECT nomMedecin, prenomMedecin FROM MEDECIN WHERE login = :login';
-				$req->prepare($txt);
+				$req = $bd->prepare($txt);
 				$req->bindValue(':login', $_POST['login']);
 				$req->execute();
 				$res = $req->fetch(PDO::FETCH_NUM);
@@ -100,7 +104,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 			if ($_POST['mdp'] = $res2['mdp'])
 			{
 				$txt = 'SELECT nomPatient, prenomPatient FROM PATIENT WHERE login = :login';
-				$req->prepare($txt);
+				$req = $bd->prepare($txt);
 				$req->bindValue(':login', $_POST['login']);
 				$req->execute();
 				$res = $req->fetch(PDO::FETCH_NUM);
