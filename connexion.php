@@ -2,7 +2,7 @@
 
 <form action="formulaire.php" action="post">
 	<p> Login <input type="text" name="login"/>
-	<p> Mot de passe <input type="hidden" name="mdp"/>
+	<p> Mot de passe <input type="password" name="mdp"/>
 	<!-- <input type="radio" name="fonction" value="medecin"/>Médecin
 	<input type="radio" name="fonction" value="patient"/>Patient -->
 	<input type="submit" value="Connexion"/>
