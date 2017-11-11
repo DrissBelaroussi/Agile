@@ -70,13 +70,13 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 	{
 		$bd = spdo::getDB ();
 		
-		$txt = 'SELECT mdp FROM MEDECIN WHERE login = :login';
+		$txt = 'SELECT mdp FROM Medecin WHERE login = :login';
 		$req1 = $bd->prepare($txt);
 		$req1->bindValue(':login', $_POST['login']);
 		$req1->execute();
 		$res1 = $req1->fetch(PDO::FETCH_ASSOC);
 		
-		$txt = 'SELECT mdp FROM PATIENT WHERE login = :login';
+		$txt = 'SELECT mdp FROM Patient WHERE login = :login';
 		$req2 = $bd->prepare($txt);
 		$req2->bindValue(':login', $_POST['login']);
 		$req2->execute();
@@ -86,7 +86,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 		{
 			if ($_POST['mdp'] = $res1['mdp'])
 			{
-				$txt = 'SELECT nomMedecin, prenomMedecin FROM MEDECIN WHERE login = :login';
+				$txt = 'SELECT nomMedecin, prenomMedecin FROM Medecin WHERE login = :login';
 				$req = $bd->prepare($txt);
 				$req->bindValue(':login', $_POST['login']);
 				$req->execute();
@@ -103,7 +103,7 @@ if (isset($_POST['login']) && isset($_POST['mdp']) && trim($_POST['login']) != '
 		{
 			if ($_POST['mdp'] = $res2['mdp'])
 			{
-				$txt = 'SELECT nomPatient, prenomPatient FROM PATIENT WHERE login = :login';
+				$txt = 'SELECT nomPatient, prenomPatient FROM Patient WHERE login = :login';
 				$req = $bd->prepare($txt);
 				$req->bindValue(':login', $_POST['login']);
 				$req->execute();

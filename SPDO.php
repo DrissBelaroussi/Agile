@@ -1,9 +1,9 @@
 <?php
 
-define('BDD_HOST', '127.0.0.1');     // aquabdd
-define('BDD_LOGIN', 'ubuntu');         // n° étudiant
+define('BDD_HOST', 'mysql-drissbelaroussi.alwaysdata.net');     // aquabdd
+define('BDD_LOGIN', '147156_driss');         // n° étudiant
 define('BDD_MDP', 'azerty');               // password étudiant
-define('BDD_DATABASE', 'agile');       // promotion16
+define('BDD_DATABASE', 'drissbelaroussi_agile');       // promotion16
 define('BDD_DRIVER', 'mysql');       // pgsql
 
 class SPDO{

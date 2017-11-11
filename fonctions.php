@@ -1,5 +1,7 @@
 <?php
 
+require_once 'SPDO.php' ;
+
 echo "bonjour";
 	
 	function connexion($login,$mdp){
