@@ -69,8 +69,43 @@ require_once 'SPDO.php' ;
 		return false ; 
 	}
 	
-	function inscriptionPatient($tableau) {
-		return false ;
+		function inscriptionPatient() {
+		
+		$bd = spdo::getDB ();
+		if(isset($_POST['nom']), isset($_POST['prenom']), isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp'])){
+			
+			$nom = $_POST['nom'];
+			$prenom = $_POST['prenom'];
+			$dateNaissance = $_POST['datenaissance'];
+			$adresse = $_POST['adresse'];
+			$ville = $_POST['ville'];
+			$cp = $_POST['cp'];
+			$tel = $_POST['tel'];
+			$mail = $_POST['mail'];
+			$login = substr(strtolower($prenom), 0, 1).strtolower($nom);
+			$mdp = "azerty";
+		
+			$req = "INSERT INTO Patient (nomPatient, prenomPatient, dateNaissance, adresse, ville, cp, tel, mail, login, mdp) VALUES (:nom, :prenom, :datenaissance, :adresse, :ville, :cp, :login, :mdp);";
+			$stmt = $bd->prepare($req);
+			$stmt->bindValue(':nom', $nom);
+			$stmt->bindValue(':prenom', $prenom);
+			$stmt->bindValue(':datenaissance', $dateNaissance);
+			$stmt->bindValue(':adresse', $adresse);
+			$stmt->bindValue(':ville', $ville);
+			$stmt->bindValue(':cp', $cp);
+			$stmt->bindValue(':tel', $tel);
+			$stmt->bindValue('mail', $mail);
+			$stmt->bindValue(':login', $login);
+			$stmt->bindValue(':mdp', $mdp);
+			$res = $stmt->execute();
+			
+			if($res){
+				return true;
+			} else {
+				return false;
+			}
+		
+		}
 	}
 	
 	function redigerCompteRendu($idPatient, $idMedecin, $contenuCR){
