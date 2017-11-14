@@ -13,7 +13,7 @@ if ($_SESSION['categorie'] == 'patient')
 	$res = $req->fetch(PDO::FETCH_ASSOC);
 ?>
 
-	<form action="modification.php" method="post">
+	<form action="modification-patient.php" method="post">
 	<p> Nom <input type="text" name="nom" value="<?php echo $res['nomPatient'] ?>"/> </p>
 	<p> Prénom <input type="text" name="prenom" value="<?php echo $res['prenomPatient'] ?>"/> </p>
 	<p> Date de naissance <input type="text" name="datenaissance" value="<?php echo $res['dateNaissance'] ?>"/> </p>
