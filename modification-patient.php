@@ -16,7 +16,7 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissanc
 		$cp = $_POST['cp'];
 
 
-		$txt ="UPDATE Patient SET nomPatient = :nomPatient, prenomPatient= :prenomPatient, dateNaissance= :dateNaissance, adresse= :adresse, ville= :ville, cp= :cp,  tel= :tel WHERE login = :login";
+		/*$txt ="UPDATE Patient SET nomPatient = :nomPatient, prenomPatient= :prenomPatient, dateNaissance= :dateNaissance, adresse= :adresse, ville= :ville, cp= :cp,  tel= :tel WHERE login = :login";
 
 
 		$req = $bd->prepare($txt);
@@ -28,7 +28,12 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissanc
 		$req->bindValue(':ville', $ville);
 		$req->bindValue(':cp', $cp);
 		$req->bindValue(':login', $login);
-		$req->execute();
+		$req->execute();*/
+
+
+		updateUser($login, $nomPatient, $prenomPatient, $adresse, $dateNaissance, $ville, $tel, $mail, $cp);
+
+
 
 
 		if(isset($_POST['nouvmdp']) && isset($_POST['nouvmdp2'])){
@@ -36,11 +41,7 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissanc
 			$nouvmdp2 = $_POST['nouvmdp2'];
 
 			if($nouvmdp === $nouvmdp2){
-				$txt = "UPDATE Patient SET mdp= :nouvmdp WHERE login=:login";
-				$req = $bd->prepare($txt); 
-				$req->bindValue(':nouvmdp', $nouvmdp);
-				$req->bindValue(':login', $login);
-
+				updatePassword($nouvmdp, $nouvmdp2);
 
 			}
 

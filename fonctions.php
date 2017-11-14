@@ -129,5 +129,37 @@ require_once 'SPDO.php' ;
 		return false ; 
 	}
 
+
+	function updateUser($login, $nomPatient, $prenomPatient, $adresse, $dateNaissance, $ville, $tel, $mail, $cp){
+		$bd = spdo::getDB ();
+		$txt ="UPDATE Patient SET nomPatient = :nomPatient, prenomPatient= :prenomPatient, dateNaissance= :dateNaissance, adresse= :adresse, ville= :ville, cp= :cp,  tel= :tel, mail= :mail WHERE login = :login";
+
+
+		$req = $bd->prepare($txt);
+
+		$req->bindValue(':nomPatient', $nomPatient);
+		$req->bindValue(':prenomPatient', $prenomPatient);
+		$req->bindValue(':dateNaissance', $dateNaissance);
+		$req->bindValue(':adresse', $adresse);
+		$req->bindValue(':ville', $ville);
+		$req->bindValue(':cp', $cp);
+		$req->bindValue(':login', $login);
+		$req->bindValue(':mail', $mail);
+		$req->bindValue(':tel', $tel);
+		$req->execute();	
+	}
+
+	function updatePassword($mdp, $mdp2){
+		$bd = spdo::getDB ();
+
+		
+				$txt = "UPDATE Patient SET mdp= :nouvmdp WHERE login=:login";
+				$req = $bd->prepare($txt); 
+				$req->bindValue(':nouvmdp', $nouvmdp);
+				$req->bindValue(':login', $login);
+				$req->execute();
+
+			
+
 	
 ?>
