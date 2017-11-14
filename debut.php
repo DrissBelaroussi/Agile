@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 
 
 if (isset($_SESSION['categorie']) && $_SESSION['categorie'] == 'medecin') {
@@ -23,7 +21,7 @@ if (isset($_SESSION['categorie']) && $_SESSION['categorie'] == 'medecin') {
 <?php
 	echo '<p> En tete medecin </p>' ;
 } else {
-
+	
 }
 
 ?>
