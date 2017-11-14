@@ -8,6 +8,7 @@ $bd = spdo::getDB ();
 if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp']))
 
 	{
+		$login = $_SESSION['login'];
 		$nomPatient = $_POST['nom'];
 		$prenomPatient = $_POST['prenom'];
 		$dateNaissance = $_POST['datenaissance'];
