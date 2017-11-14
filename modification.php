@@ -29,6 +29,7 @@ if ($_SESSION['categorie'] == 'patient')
 	</form>
 
 <?php
+/**
 	if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp']) && isset($_POST['mdp']))
 	{
 		$nomPatient = $_POST['nom'];
@@ -66,6 +67,7 @@ if ($_SESSION['categorie'] == 'patient')
 	else{
 		var_dump($_POST);
 	}
+*/
 	
 } else if ($_SESSION['categorie'] == 'medecin')
 {

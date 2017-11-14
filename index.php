@@ -11,11 +11,6 @@ if (isset($_SESSION['categorie']) && $_SESSION['categorie'] == 'medecin') {
 
 } else if (isset($_SESSION['categorie']) && $_SESSION['categorie'] == 'patient') {
 
-	echo '<p> index medecin </p>' ;
-} else {
-	header("location: http://google.fr");
-	exit;
-}	
-
-
+	echo '<p> index patient </p>' ;
+}
 ?>

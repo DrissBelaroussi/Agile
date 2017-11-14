@@ -65,14 +65,14 @@ require_once 'SPDO.php' ;
 	return $msg ; 
 }
 	
-	function deconnexion($login){
-		return false ; 
+	function deconnexion(){
+		session_unset() ; 
 	}
 	
 		function inscriptionPatient() {
 		
 		$bd = spdo::getDB ();
-		if(isset($_POST['nom']), isset($_POST['prenom']), isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp'])){
+		if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp'])){
 			
 			$nom = $_POST['nom'];
 			$prenom = $_POST['prenom'];
@@ -85,7 +85,7 @@ require_once 'SPDO.php' ;
 			$login = substr(strtolower($prenom), 0, 1).strtolower($nom);
 			$mdp = "azerty";
 		
-			$req = "INSERT INTO Patient (nomPatient, prenomPatient, dateNaissance, adresse, ville, cp, tel, mail, login, mdp) VALUES (:nom, :prenom, :datenaissance, :adresse, :ville, :cp, :login, :mdp);";
+			$req = "INSERT INTO Patient (nomPatient, prenomPatient, dateNaissance, adresse, ville, cp, tel, mail, login, mdp) VALUES (:nom, :prenom, :datenaissance, :adresse, :ville, :cp, :tel, :mail, :login, :mdp);";
 			$stmt = $bd->prepare($req);
 			$stmt->bindValue(':nom', $nom);
 			$stmt->bindValue(':prenom', $prenom);
@@ -184,17 +184,18 @@ require_once 'SPDO.php' ;
 		$req->execute();	
 	}
 
-	function updatePassword($mdp, $mdp2){
+	function updatePassword($mdp, $mdpAncien){
 		$bd = spdo::getDB ();
 
 		
-				$txt = "UPDATE Patient SET mdp= :nouvmdp WHERE login=:login";
+				$txt = "UPDATE Patient SET mdp= :nouvmdp WHERE login=:login and mdp =:mdp";
 				$req = $bd->prepare($txt); 
-				$req->bindValue(':nouvmdp', $nouvmdp);
-				$req->bindValue(':login', $login);
+				$req->bindValue(':nouvmdp', $mdp);
+				$req->bindValue(':login', $_SESSION['login']);
+				$req->bindValue(':mdp', $mdpAncien);
 				$req->execute();
 
-			
+	}		
 
 	
 ?>
