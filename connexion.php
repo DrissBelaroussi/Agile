@@ -1,7 +1,12 @@
-<?php require_once('SPDO.php'); ?>
-<?php require_once('fonctions.php'); ?>
+<?php
+session_start();
+require_once('SPDO.php'); 
+require_once('fonctions.php'); 
+
+?>
 
 <h1> Connexion </h1>
+
 
 <form action='connexion.php' method="post">
 	<p> Login <input type="text" name="login"/> </p>
@@ -12,5 +17,10 @@
 </form>
 
 <?php
-	echo '<p>'.$msg.'</p>' ;
+	
+	if (isset($_SESSION['login']) && $_SESSION['login'] != '') {
+		echo '<p>'.$msg.'</p>' ;
+		echo '<p>'. $_SESSION['login'] .'</p>' ;
+	}
+	
 ?>
