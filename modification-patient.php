@@ -35,7 +35,7 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissanc
 			$nouvmdp = $_POST['nouvmdp'];
 			$nouvmdp2 = $_POST['nouvmdp2'];
 
-			if(strcmp($nouvmdp, $nouvmdp2)){
+			if($nouvmdp=== $nouvmdp2){
 				$txt = "UPDATE Patient SET mdp= :nouvmdp WHERE login=:login";
 				$req = $bd->prepare($txt); 
 				$req->bindValue(':nouvmdp', $nouvmdp);
