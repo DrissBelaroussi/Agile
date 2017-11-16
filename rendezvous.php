@@ -1,6 +1,8 @@
-<?phpsession_start();
+<?php
+session_start();
 require_once('SPDO.php');
-require_once('fonctions.php'); ?>
+require_once('fonctions.php'); 
+?>
 
 
 	<form action="rendezvous.php" method="post">
