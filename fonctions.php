@@ -269,5 +269,33 @@ require_once 'SPDO.php' ;
 
 	}		
 
+
+function getCompteRenduList($idPatient){
+	$stmt = SPDO::getDB() ;
+	$req = " select * from CompteRendu where idPatient = $idPatient; " ;
+	$result = $stmt->query($req);
+	 while($entree = $result->fetch(PDO::FETCH_ASSOC))
+    {
+        $comptes_rendu[] = $entree;
+    }
+
+
+    return $comptes_rendu;
+}
+
+
+function getCompteRendu($idCompteRendu, $idPatient){
+	$stmt = SPDO::getDB();
+	$req = "select * from CompteRendu WHERE idCompteRendu= :idCompteRendu AND idPatient = :idPatient";
+	$stmt->prepare($req);
+	$stmt->bindValue(':idCompteRendu', $idCompteRendu);
+	$stmt->bindValue(':idPatient', $idPatient);
+	$stmt->execute();
+	$entree = $result->fetch(PDO::FETCH_ASSOC);
+	return $entree;
+
+}
+
+
 	
 ?>
