@@ -2,7 +2,7 @@
 session_start();
 require_once('SPDO.php');
 require_once('fonctions.php');
-echo '<pknkn</p>' ;
+echo '<p></p>' ;
 if ($_SESSION['categorie'] == 'patient')
 {
 	$bd = spdo::getDB ();
@@ -13,7 +13,7 @@ if ($_SESSION['categorie'] == 'patient')
 	$res = $req->fetch(PDO::FETCH_ASSOC);
 ?>
 
-	<form action="modification-patient.php" method="post">
+	<form action="modification.php" method="post">
 	<p> Nom <input type="text" name="nom" value="<?php echo $res['nomPatient'] ?>"/> </p>
 	<p> Prénom <input type="text" name="prenom" value="<?php echo $res['prenomPatient'] ?>"/> </p>
 	<p> Date de naissance <input type="text" name="datenaissance" value="<?php echo $res['dateNaissance'] ?>"/> </p>
@@ -29,45 +29,29 @@ if ($_SESSION['categorie'] == 'patient')
 	</form>
 
 <?php
-/**
-	if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp']) && isset($_POST['mdp']))
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp']))
 	{
+		$login = $_SESSION['login'];
 		$nomPatient = $_POST['nom'];
 		$prenomPatient = $_POST['prenom'];
 		$dateNaissance = $_POST['datenaissance'];
 		$adresse = $_POST['adresse'];
 		$ville = $_POST['ville'];
 		$cp = $_POST['cp'];
+		$tel = $_POST['tel'];
 		$mail = $_POST['mail'];
-		$login = $_SESSION['login'];
-		$mdp = $_POST['mdp'];
-		$txt ="UPDATE Patient SET nomPatient = :nomPatient, prenomPatient= :prenomPatient, dateNaissance= :dateNaissance, adresse= :adresse, ville= :ville, cp= :cp,  tel= :tel, mail= :mail WHERE login = :login AND mdp = :mdp";
-		$req = $bd->prepare($txt);
-		$req->bindValue(':nomPatient', $nomPatient);
-		$req->bindValue(':prenomPatient', $prenomPatient);
-		$req->bindValue(':dateNaissance', $dateNaissance);
-		$req->bindValue(':adresse', $adresse);
-		$req->bindValue(':ville', $ville);
-		$req->bindValue(':cp', $cp);
-		$req->bindValue(':mail', $mail);
-		$req->bindValue(':login', $login);
-		$req->bindValue(':mdp', $mdp);
-		$req->execute();
-		if(isset($_POST['nouvmdp']) && isset($_POST['nouvmdp2'])){
+		updateUser($login, $nomPatient, $prenomPatient, $adresse, $dateNaissance, $ville, $tel, $mail, $cp);
+		if(isset($_POST['nouvmdp']) && isset($_POST['nouvmdp2']) && $_POST['nouvmdp'] != '' ){
 			$nouvmdp = $_POST['nouvmdp'];
 			$nouvmdp2 = $_POST['nouvmdp2'];
-			if($nouvmdp === $nouvmdp2){
-				$txt = "UPDATE Patient SET mdp= :nouvmdp WHERE login=:login";
-				$req = $bd->prepare($txt); 
-				$req->bindValue(':nouvmdp', $nouvmdp);
-				$req->bindValue(':login', $login);
+			if($nouvmdp === $nouvmdp2 ){
+				updatePassword($nouvmdp, $_POST['mdp']);
 			}
 		}
 	}
-	else{
-		var_dump($_POST);
-	}
-*/
+else{
+	var_dump($_POST);
+}
 	
 } else if ($_SESSION['categorie'] == 'medecin')
 {
@@ -95,42 +79,28 @@ if ($_SESSION['categorie'] == 'patient')
 </form>
 
 <?php
-	if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp']) && isset($_POST['mdp']))
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['datenaissance']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['cp']))
 	{
+		$login = $_SESSION['login'];
 		$nomMedecin = $_POST['nom'];
 		$prenomMedecin = $_POST['prenom'];
 		$dateNaissance = $_POST['datenaissance'];
-		$adresse = $_POST['adresse'];
-		$ville = $_POST['ville'];
-		$cp = $_POST['cp'];
+		$adresse = $_POST['adresseCabinet'];
+		$ville = $_POST['villeCabinet'];
+		$cp = $_POST['cpCabinet'];
+		$tel = $_POST['tel'];
 		$mail = $_POST['mail'];
-		$login = $_SESSION['login'];
-		$mdp = $_POST['mdp'];
-		$txt ="UPDATE Patient SET nomMedecin= :nomMedecin, prenomMedecin = :prenomMedecin, dateNaissance= :dateNaissance, adresseCabinet= :adresse, villeCabinet= :ville, cpCabinet= :cp,  tel= :tel, mail= :mail WHERE login = :login AND mdp = :mdp";
-		$req = $bd->prepare($txt);
-		$req->bindValue(':nomMedecin', $nomMedecin);
-		$req->bindValue(':prenomMedecin', $prenomMedecin);
-		$req->bindValue(':dateNaissance', $dateNaissance);
-		$req->bindValue(':adresse', $adresse);
-		$req->bindValue(':ville', $ville);
-		$req->bindValue(':cp', $cp);
-		$req->bindValue(':mail', $mail);
-		$req->bindValue(':login', $login);
-		$req->bindValue(':mdp', $mdp);
-		$req->execute();
-		if(isset($_POST['nouvmdp']) && isset($_POST['nouvmdp2'])){
+		updateUser($login, $nomMedecin, $prenomMedecin, $adresse, $dateNaissance, $ville, $tel, $mail, $cp);
+		if(isset($_POST['nouvmdp']) && isset($_POST['nouvmdp2']) && $_POST['nouvmdp'] != '' ){
 			$nouvmdp = $_POST['nouvmdp'];
 			$nouvmdp2 = $_POST['nouvmdp2'];
-			if($nouvmdp === $nouvmdp2){
-				$txt = "UPDATE Patient SET mdp= :nouvmdp WHERE login=:login";
-				$req = $bd->prepare($txt); 
-				$req->bindValue(':nouvmdp', $nouvmdp);
-				$req->bindValue(':login', $login);
+			if($nouvmdp === $nouvmdp2 ){
+				updatePassword($nouvmdp, $_POST['mdp']);
 			}
 		}
 	}
-	else{
-		var_dump($_POST);
-	}
+else{
+	var_dump($_POST);
+}
 }
 ?>
