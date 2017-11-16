@@ -149,6 +149,21 @@ require_once 'SPDO.php' ;
 			die('<p> La connexion a échoué. Erreur[' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
 		}
 	}
+
+	function getPatients($nom){
+		$bd = SPDO::getDB() ;
+		$req = " select * from Patient where nomPatient = :nomPatient ; " ;
+		$stmt = $bd->prepare($req);
+				$stmt->bindValue(':nomPatient', $nom);
+				$stmt->execute();
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		if($res){
+			return $res;
+		} else {
+			return false;
+		}
+	}
 	
 	function redigerCompteRendu($idPatient, $idMedecin, $contenuCR){
 		try
