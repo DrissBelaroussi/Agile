@@ -16,5 +16,6 @@ require_once('fonctions.php'); ?>
 	{
 		case -1 : echo "Rendez-vous enregistré"; break;
 		case -2 : echo "Les données du médecin ne sont pas valides"; break;
+		case -3 : echo "Vous avez déjà un rendez-vous pris à cette date"; break;
 	}
 	?>
