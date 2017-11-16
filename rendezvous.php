@@ -25,4 +25,6 @@ require_once('debut.php');
 		case -2 : echo "Les données du médecin ne sont pas valides"; break;
 		case -3 : echo "Vous avez déjà un rendez-vous pris à cette date"; break;
 	}
+	
+	listeRDV();
 	?>
