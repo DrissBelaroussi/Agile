@@ -1,8 +1,6 @@
 <?php
 require_once 'SPDO.php' ;
 
-
-
     function connexion(){
     $msg = '' ; 
 
@@ -11,49 +9,46 @@ require_once 'SPDO.php' ;
 		try
 		{
 			$bd = spdo::getDB ();
-					$medecin = false ;
-					$patient = false ; 
-
-					$txt = 'SELECT nomMedecin, prenomMedecin FROM Medecin WHERE login = :login and mdp =:mdp' ;
-					$req = $bd->prepare($txt);
-					$req->bindValue(':login', $_POST['login']);
-					$req->bindValue(':mdp', $_POST['mdp']);
-					$req->execute();
-					$res1 = $req->fetch(PDO::FETCH_ASSOC);
-					
-
-					$txt = 'SELECT nomPatient, prenomPatient FROM Patient WHERE login = :login and mdp =:mdp';
-					$req = $bd->prepare($txt);
-					$req->bindValue(':login', $_POST['login']);
-					$req->bindValue(':mdp', $_POST['mdp']);
-					$req->execute();
-					$res2 = $req->fetch(PDO::FETCH_ASSOC);
-
-		
-
-					if($res1){
-						$medecin = true ;
-					
-						$_SESSION['nom'] = $res1['nomMedecin'];
-						$_SESSION['prenom'] = $res1['prenomMedecin'];
-						$_SESSION['categorie'] = 'medecin' ;
-						$_SESSION['login'] =  $_POST['login'];
-						$_SESSION['connecte'] = true;
-
-						$msg = "Connexion Medecin réussie - Bienvenue ". $_SESSION['prenom'] ;			
-						var_dump($_SESSION);
-					} elseif($res2){
-						$patient = true ; 
-						$_SESSION['nom'] = $res2['nomPatient'];
-						$_SESSION['prenom'] = $res2['prenomPatient'];
-						$_SESSION['categorie'] = 'patient' ;
-						$_SESSION['login'] = $_POST['login'] ;
-						$_SESSION['connecte'] = true;	
-						$msg = "Connexion Patient réussie - Bienvenue ". $_SESSION['prenom'] ;			
-						var_dump($_SESSION);
-					} else {
-						$msg ="Connexion échouée - identifiants incorrects." ;
-					}
+			$medecin = false ;
+			$patient = false ; 
+			
+			$txt = 'SELECT nomMedecin, prenomMedecin FROM Medecin WHERE login = :login and mdp =:mdp' ;
+			$req = $bd->prepare($txt);
+			$req->bindValue(':login', $_POST['login']);
+			$req->bindValue(':mdp', $_POST['mdp']);
+			$req->execute();
+			$res1 = $req->fetch(PDO::FETCH_ASSOC);
+			
+			$txt = 'SELECT nomPatient, prenomPatient FROM Patient WHERE login = :login and mdp =:mdp';
+			$req = $bd->prepare($txt);
+			$req->bindValue(':login', $_POST['login']);
+			$req->bindValue(':mdp', $_POST['mdp']);
+			$req->execute();
+			$res2 = $req->fetch(PDO::FETCH_ASSOC);
+			
+			if($res1){
+				$medecin = true ;
+				
+				$_SESSION['nom'] = $res1['nomMedecin'];
+				$_SESSION['prenom'] = $res1['prenomMedecin'];
+				$_SESSION['categorie'] = 'medecin' ;
+				$_SESSION['login'] =  $_POST['login'];
+				$_SESSION['connecte'] = true;
+				
+				$msg = "Connexion Medecin réussie - Bienvenue ". $_SESSION['prenom'] ;			
+				var_dump($_SESSION);
+			} elseif($res2){
+				$patient = true ; 
+				$_SESSION['nom'] = $res2['nomPatient'];
+				$_SESSION['prenom'] = $res2['prenomPatient'];
+				$_SESSION['categorie'] = 'patient' ;
+				$_SESSION['login'] = $_POST['login'] ;
+				$_SESSION['connecte'] = true;	
+				$msg = "Connexion Patient réussie - Bienvenue ". $_SESSION['prenom'] ;			
+				var_dump($_SESSION);
+			} else {
+				$msg ="Connexion échouée - identifiants incorrects." ;
+			}
 						
 		}
 		
@@ -267,9 +262,9 @@ require_once 'SPDO.php' ;
 		try
 		{
 			$bd = SPDO::getDB();
-			if (isset($_POST['date']) && isset($_POST['nom']) && isset($_POST['prenom'])
+			if (isset($_POST['date']) && isset($_POST['nom']) && isset($_POST['prenom']))
 			{
-				if (trim($_POST['date'] && isset($_POST['nom'] && isset($_POST['prenom'])
+				if (trim($_POST['date']) != '' && trim($_POST['nom']) != '' && trim($_POST['prenom']) != '')
 				{
 					$txt = "select date from RDV where loginPatient = :loginPatient and date = :date";
 					$req = $bd->prepare($txt);
@@ -298,7 +293,7 @@ require_once 'SPDO.php' ;
 							$res = $req->fetch(PDO::FETCH_ASSOC);
 							$idPatient = $res['idPatient'];
 							
-							$txt = "insert into table RDV values (:date, :idPatient, :idMedecin, 'C'";
+							$txt = "insert into RDV values (:date, :idPatient, :idMedecin, 'C')";
 							$req = $bd->prepare($txt);
 							$req->bindValue(':date', $date);
 							$req->bindValue(':idPatient', $idPatient);
@@ -365,7 +360,6 @@ function getCompteRenduList($idPatient){
 	}
 }
 
-
 function getCompteRendu($idCompteRendu, $idPatient){
 	try
 	{
@@ -385,7 +379,5 @@ function getCompteRendu($idCompteRendu, $idPatient){
 	}	
 
 }
-
-
 	
 ?>
