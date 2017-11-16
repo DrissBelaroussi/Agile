@@ -130,8 +130,13 @@ require_once 'SPDO.php' ;
 				$stmt->bindValue(':idPatient', $idPatient);
 				$stmt->bindValue(':idMedecin', $idMedecin);
 				$stmt->bindValue(':contenuCR', $contenuCR);
-				$stmt->execute();																					   
-		return false ; 
+				$stmt->execute();	
+		if($res){
+			return true;
+		} else {
+			return false;
+		}																				   
+	 
 	}
 	
 	function getCompteRendu($idPatient, $idMedecin, $date){

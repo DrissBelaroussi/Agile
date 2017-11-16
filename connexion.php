@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+         <link rel="stylesheet" href="style.css" />
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <title>MediDOC</title>
@@ -19,15 +19,18 @@ if(isset($_GET['deconnexion'])){
 	deconnexion() ;
 }
 ?>
+<div class="container">
+	<h1> Connexion </h1>
 
-<h1> Connexion </h1>
+<div class="form-group">
+	<form action='connexion.php' method="post">
+		<p> Login <input type="text" name="login" class="form-control"/> </p>
+		<p> Mot de passe <input type="password"  name="mdp" class="form-control" id="pwd"/> </p>
+		<p> <button class="btn btn-info" type="submit" action=<?php $msg = connexion() ; ?> /> Connexion </p>
+	</form>
+</div>
+</div>
 
-
-<form action='connexion.php' method="post">
-	<p> Login <input type="text" name="login"/> </p>
-	<p> Mot de passe <input type="password" name="mdp"/> </p>
-	<p> <button class="btn btn-info" type="submit" action=<?php $msg = connexion() ; ?> /> Connexion </p>
-</form>
 
 <?php
 	

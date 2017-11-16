@@ -13,4 +13,7 @@ if (isset($_SESSION['categorie']) && $_SESSION['categorie'] == 'medecin') {
 
 	echo '<p> index patient </p>' ;
 }
+
+
+require_once('fin.php') ;
 ?>
